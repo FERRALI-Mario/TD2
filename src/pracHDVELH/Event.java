@@ -1,7 +1,7 @@
 /**
  * File: NodeMultipleEvents.java
  * Creation: 7 nov. 2020, Jean-Philippe.Prost@univ-amu.fr
- * Template étudiants
+ * Template Ã©tudiants
  */
 package pracHDVELH;
 
@@ -17,47 +17,67 @@ public class Event extends NodeMultiple {
 	public static final String ERROR_MSG_UNEXPECTED_END = "Sorry, for some unexpected reason the story ends here...";
 	public static final String PROMPT_ANSWER = "Answer: ";
 	public static final String WARNING_MSG_INTEGER_EXPECTED = "Please input a integer within range!";
+	
+	private String playerAnswer;
+	private Scanner reader;
+	private int chosenPath;
+	private GUIManager gui;
+	private int id;
+	
+	static private int lastId = -1;
 
+	/* Constructeur */
+	public Event() {
+		this(new GUIManager(), null);
+	}
+	public Event(GUIManager gui, String data) {
+		super(data);
+		chosenPath = -1;
+		this.gui = gui;
+		this.reader = gui.getInputReader();
+		id = ++lastId;
+	}
+	
 	/**
 	 * @return the playerAnswer
 	 */
 	public String getPlayerAnswer() {
-		/* TO BE COMPLETED */
+		return playerAnswer;
 	}
 
 	/**
 	 * @param playerAnswer the playerAnswer to set
 	 */
 	public void setPlayerAnswer(String playerAnswer) {
-		/* TO BE COMPLETED */
+		this.playerAnswer = playerAnswer;
 	}
 
 	/**
 	 * @return the reader
 	 */
 	public Scanner getReader() {
-		/* TO BE COMPLETED */
+		return reader;
 	}
 
 	/**
 	 * @param reader the reader to set
 	 */
 	public void setReader(Scanner reader) {
-		/* TO BE COMPLETED */
+		this.reader = reader;
 	}
 
 	/**
 	 * @return the chosenPath
 	 */
 	public int getChosenPath() {
-		/* TO BE COMPLETED */
+		return chosenPath;
 	}
 
 	/**
 	 * @param chosenPath the chosenPath to set
 	 */
 	public void setChosenPath(int chosenPath) {
-		/* TO BE COMPLETED */
+		this.chosenPath = chosenPath;
 	}
 
 	/* Methods */
@@ -97,25 +117,30 @@ public class Event extends NodeMultiple {
 	 * @return the gui
 	 */
 	public GUIManager getGui() {
-		/* TO BE COMPLETED */
+		return gui;
 	}
 
 	/**
 	 * @param gui the gui to set
 	 */
 	public void setGui(GUIManager gui) {
-		/* TO BE COMPLETED */
+		this.gui = gui;
 	}
 
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		/* TO BE COMPLETED */
+		return id;
 	}
 
-	/* Methods */
-	/* TO BE COMPLETED */
+	public Event run() {
+		gui.outputln(getData());
+		gui.output(PROMPT_ANSWER);
+		playerAnswer = reader.next();
+		chosenPath = interpretAnswer();
+		return getDaughter(chosenPath);
+	}
 	
 }
 
