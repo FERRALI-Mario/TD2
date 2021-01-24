@@ -1,14 +1,14 @@
 /**
  * File: NodeMultiple.java
  * Creation: 7 nov. 2020, Jean-Philippe.Prost@univ-amu.fr
- * Template étudiants
+ * Template Ã©tudiants
  */
 package pracHDVELH;
 
 import myUtils.ErrorNaiveHandler;
 
 /**
- * @author prost
+ * @author FERRALI Mario
  *
  */
 public class NodeMultiple {
@@ -21,7 +21,7 @@ public class NodeMultiple {
 	/* Overridden methods */
 	@Override
 	public String toString() {
-		/* TO BE COMPLETED */
+		return data.toString();
 	}
 
 	/* Getters/Setters */
@@ -33,8 +33,12 @@ public class NodeMultiple {
 	 * @param i the index of the daughter node.
 	 * @return the {@code i}th daughter node, or {@code null} if it does not exist.
 	 */
+	
 	public NodeMultiple getDaughter(int i) {
-		/* TO BE COMPLETED */
+		if (i < 0 || i >= NODE_MAX_ARITY) {
+			ErrorNaiveHandler.abort(ERROR_MSG_INDEX_OUT_OF_RANGE + "@" + getClass() + ".getDaughter()");
+		}
+		return daughters[i];
 	}
 
 	/**
@@ -52,21 +56,24 @@ public class NodeMultiple {
 	 * @param i        the daughter node's index
 	 */
 	public void setDaughter(NodeMultiple daughter, int i) {
-		/* TO BE COMPLETED */
+		if (i < 0 || i >= NODE_MAX_ARITY) {
+			ErrorNaiveHandler.abort(ERROR_STATUS_INDEX_OUT_OF_RANGE + "@" + getClass() + ".setDaughter()");
+		}
+		daughters[i] = daughter;
 	}
 
 	/**
 	 * @return all the daughters
 	 */
 	public NodeMultiple[] getDaughters() {
-		/* TO BE COMPLETED */
+		return daughters;
 	}
 
 	/**
 	 * @param daughters the daughters to set
 	 */
 	public void setDaughters(NodeMultiple[] daughters) {
-		/* TO BE COMPLETED */
+		this.daughters = daughters;
 	}
 
 	/**
@@ -78,21 +85,31 @@ public class NodeMultiple {
 	 * @param daughter
 	 */
 	public void addDaughter(NodeMultiple daughter) {
-		/* TO BE COMPLETED */
+		if (daughter == null) {
+			return;
+		}
+		int i = 0;
+		
+		while (i < daughters.length && daughters[i] != null) {
+			i++;
+		}
+		if (i < daughters.length) {
+			daughters[i] = daughter;
+		}
 	}
 
 	/**
 	 * @return the content data
 	 */
 	public Object getData() {
-		/* TO BE COMPLETED */
+		return data;
 	}
 
 	/**
 	 * @param data
 	 */
 	public void setData(Object data) {
-		/* TO BE COMPLETED */
+		this.data = data;
 	}
 
 	/**
@@ -100,7 +117,11 @@ public class NodeMultiple {
 	 *         daughter node.
 	 */
 	public boolean hasDaughters() {
-		/* TO BE COMPLETED */
+		int i = 0;
+		while (i < daughters.length && daughters[i] == null) {
+			i++;
+		}
+		return i < daughters.length ? true : false;
 	}
 
 	/* Constructors */
@@ -108,9 +129,6 @@ public class NodeMultiple {
 	 * Default constructor.
 	 */
 	public NodeMultiple() {
-		/* TO BE COMPLETED */
-//		super();
-		data = new Object();// inutile...
 		daughters = new NodeMultiple[NODE_MAX_ARITY];
 	}
 
@@ -121,7 +139,8 @@ public class NodeMultiple {
 	 * @param data
 	 */
 	public NodeMultiple(Object data) {
-		/* TO BE COMPLETED */
+		this();
+		this.data = data;
 	}
 }
 
