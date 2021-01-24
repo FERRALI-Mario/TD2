@@ -10,7 +10,7 @@ import java.util.Scanner;
 import myUtils.ErrorNaiveHandler;
 
 /**
- * @author prost
+ * @author FERRALI Mario
  *
  */
 public class Event extends NodeMultiple {
