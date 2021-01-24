@@ -1,12 +1,12 @@
 /**
  * File: ScenarioDG.java
  * Creation: 7 nov. 2020, Jean-Philippe.Prost@univ-amu.fr
- * Template étudiants
+ * Template Ã©tudiants
  */
 package pracHDVELH;
 
 /**
- * @author prost
+ * @author FERRALI Mario
  *
  */
 public class Scenario {
@@ -73,6 +73,44 @@ public class Scenario {
 		event4.addDaughter(event2);
 		event4.addDaughter(endEvent);
 		event4.addDaughter(event3);
+
+		public int interpretAnswer () {
+			if (playerAnswer == null){
+				ErrorNaiveHandler.abort("Wrong usage of interpretAnswer() with a null or empty current answer");
+			}
+			while(playerAnswer.isEmpty() || !playerAnswer.matches("[0-9]") || !isInRange(Integer.parseInt(playerAnswer) - 1)) {
+				gui.outputln(WARNING_MSG_INTEGER_EXPECTED);
+				gui.output(PROMPT_ANSWER);
+				playerAnswer = reader.next();
+			}
+			return Integer.parseInt(playerAnswer) - 1;
+		}
+
+		public boolean isInRange(int Index) {
+			if (index < 0 || index >= getDaughthers().length) {
+				return false;
+			}
+			int i = 0;
+			while (i < getDaughters().length && getDaughters()[i] != null){
+				i++;
+			}
+			return index < 1;
+		}
+
+		public String run()
+		{
+			Event nextStep;
+			if (nextStep = getHead()) == null) {
+				return MSG_EMPTY_SCENARIO;
+		}
+
+			while (!nextStep.isFinal()) {
+				nextStep = nextStep.run();
+			}
+			gui.outputln(nextStep.getData());
+			return MSG_FINALE;
+
+		}
 
 		System.out.println(scenario.run());
 	}
