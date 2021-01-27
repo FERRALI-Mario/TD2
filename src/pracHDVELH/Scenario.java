@@ -1,7 +1,7 @@
 /**
  * File: ScenarioDG.java
  * Creation: 7 nov. 2020, Jean-Philippe.Prost@univ-amu.fr
- * Template Ã©tudiants
+ * Template Ã©tudiants 
  */
 package pracHDVELH;
 
