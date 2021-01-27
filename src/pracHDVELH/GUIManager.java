@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * @author prost
+ * @author FERRALI Mario
  *
  */
 public class GUIManager {
